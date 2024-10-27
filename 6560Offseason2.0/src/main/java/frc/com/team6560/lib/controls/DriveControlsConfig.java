@@ -30,21 +30,17 @@ public class DriveControlsConfig {
         this.deadband = deadband;
     }
 
-    /**
-     * Get default config for driver controls
-     * @return DriveControlsConfig object with default parameters.
-     */
-    public DriveControlsConfig getDefaultConfig() {
-        return new DriveControlsConfig(
-            0.4, 
-            0.0, 
-            0.6, 
-            .025, 
-            .125, 
-            0.0, 
-            0.3, 
-            .0025, 
-            0.1
-        );
+    public DriveControlsConfig() {
+        this.speedInitialPercent = 0.4;
+        this.speedMinPercent = 0.0; 
+        this.speedMaxPercent = 0.6; 
+        this.speedStepPercent = .025;
+
+        this.turnSpeedInitialPercent = .125;
+        this.turnSpeedMinPercent = 0.0;
+        this.turnSpeedMaxPercent = 0.3;
+        this.turnSpeedStepPercent = .0025;
+    
+        this.deadband = 0.1;
     }
 }

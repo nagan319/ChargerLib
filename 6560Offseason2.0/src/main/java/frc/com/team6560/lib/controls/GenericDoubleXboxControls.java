@@ -9,8 +9,8 @@ import frc.com.team6560.lib.util.PovNumberStepper;
  * Can be subclassed for more concrete controls implementation.
  */
 public class GenericDoubleXboxControls implements GenericControlsIO {
-    private XboxController driverController;
-    private XboxController shooterController;
+    protected XboxController driverController;
+    protected XboxController shooterController;
     private DriveControlsConfig config;
 
     private final PovNumberStepper speed;

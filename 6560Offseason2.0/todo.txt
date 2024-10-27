@@ -1,4 +1,5 @@
 - try synchronizing can signals for talonfx and sparkmax <-- low priority, think about this later
-- implement drivetrain in lib so that it can be configured with different chassis widths, motors, etc.
-- automatically generate output file with all subsystems and properties
+- figure out drivetrain odometry
+- get rid of CanID class - pretty useless
+- figure out AdvantageKit logging, 'deprecated' TimedRobot class
 - see if possible to make aiming subsystems more accurate - professional approach: 1678, 254

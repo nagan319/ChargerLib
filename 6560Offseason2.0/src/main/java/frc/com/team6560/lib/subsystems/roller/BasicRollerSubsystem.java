@@ -9,12 +9,17 @@ import java.util.ArrayList;
 
 import static frc.com.team6560.lib.util.NetworkTable.NtValueDisplay.ntDispTab;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+
 /** 
  * Basic roller subsystem that can be subclassed as needed.
- * Covers any subsystem that includes a combination of Talon or Spark-based motors and (optionally) the functionality of which is determined entirely by a single digital sensor.
- *  Works for intakes, flywheels, transfers etc.
+ * Covers any subsystem that includes a combination of Talon or Spark-based motors and (optionally) 
+ * the functionality of which is determined entirely by a single digital sensor.
+ * Works for intakes, flywheels, transfers etc.
+ * Note: Make sure to call build() after initializing to ensure that subsystem properties are displayed on Shuffleboard.
  */
-public class BasicRollerSubsystem implements BasicRollerSubsystemIO {
+public class BasicRollerSubsystem extends SubsystemBase implements BasicRollerSubsystemIO {
 
     private String name;
 
