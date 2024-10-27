@@ -16,31 +16,55 @@ public class DriveControlsConfig {
 
     public final double deadband;
 
-    public DriveControlsConfig(double speedInitialPercent, double speedMinPercent, double speedMaxPercent, double speedStepPercent, double turnSpeedInitialPercent, double turnSpeedMinPercent, double turnSpeedMaxPercent, double turnSpeedStepPercent, double deadband) {
-        this.speedInitialPercent = speedInitialPercent;
-        this.speedMinPercent = speedMinPercent;
-        this.speedMaxPercent = speedMaxPercent;
-        this.speedStepPercent = speedStepPercent;
+    /**
+     * Private constructor to enforce usage of builder.
+     * @param builder Builder to initialize class.
+     */
+    private DriveControlsConfig(Builder builder) {
+        this.speedInitialPercent = builder.speedInitialPercent;
+        this.speedMinPercent = builder.speedMinPercent;
+        this.speedMaxPercent = builder.speedMaxPercent;
+        this.speedStepPercent = builder.speedStepPercent;
 
-        this.turnSpeedInitialPercent = turnSpeedInitialPercent;
-        this.turnSpeedMinPercent = turnSpeedMinPercent;
-        this.turnSpeedMaxPercent = turnSpeedMaxPercent;
-        this.turnSpeedStepPercent = turnSpeedStepPercent;
+        this.turnSpeedInitialPercent = builder.turnSpeedInitialPercent;
+        this.turnSpeedMinPercent = builder.turnSpeedMinPercent;
+        this.turnSpeedMaxPercent = builder.turnSpeedMaxPercent;
+        this.turnSpeedStepPercent = builder.turnSpeedStepPercent;
 
-        this.deadband = deadband;
+        this.deadband = builder.deadband;
     }
 
-    public DriveControlsConfig() {
-        this.speedInitialPercent = 0.4;
-        this.speedMinPercent = 0.0; 
-        this.speedMaxPercent = 0.6; 
-        this.speedStepPercent = .025;
+    /**
+     * Builder for DriveControlsConfig.
+     */
+    public static class Builder {
 
-        this.turnSpeedInitialPercent = .125;
-        this.turnSpeedMinPercent = 0.0;
-        this.turnSpeedMaxPercent = 0.3;
-        this.turnSpeedStepPercent = .0025;
-    
-        this.deadband = 0.1;
+        private double speedInitialPercent = 0.4;
+        private double speedMinPercent = 0.0; 
+        private double speedMaxPercent = 0.6; 
+        private double speedStepPercent = 0.025;
+
+        private double turnSpeedInitialPercent = 0.125;
+        private double turnSpeedMinPercent = 0.0;
+        private double turnSpeedMaxPercent = 0.3;
+        private double turnSpeedStepPercent = 0.0025;
+
+        private double deadband = 0.1;
+
+        public Builder setSpeedInitialPercent(double percent) { this.speedInitialPercent = percent; return this; }
+        public Builder setSpeedMinPercent(double percent) { this.speedMinPercent = percent; return this; }
+        public Builder setSpeedMaxPercent(double percent) { this.speedMaxPercent = percent; return this; }
+        public Builder setSpeedStepPercent(double percent) { this.speedStepPercent = percent; return this; }
+
+        public Builder setTurnSpeedInitialPercent(double percent) { this.turnSpeedInitialPercent = percent; return this; }
+        public Builder setTurnSpeedMinPercent(double percent) { this.turnSpeedMinPercent = percent; return this; }
+        public Builder setTurnSpeedMaxPercent(double percent) { this.turnSpeedMaxPercent = percent; return this; }
+        public Builder setTurnSpeedStepPercent(double percent) { this.turnSpeedStepPercent = percent; return this; }
+
+        public Builder setDeadband(double deadband) { this.deadband = deadband; return this; }
+
+        public DriveControlsConfig build() {
+            return new DriveControlsConfig(this);
+        }
     }
 }

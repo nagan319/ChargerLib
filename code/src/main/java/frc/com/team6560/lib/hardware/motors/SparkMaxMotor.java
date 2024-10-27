@@ -6,8 +6,6 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkBase.SoftLimitDirection;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
-import frc.com.team6560.lib.drivers.CANDeviceId;
-
 /**
  * Class representing a SparkMax motor implementation of the MotorIO interface.
  * Provides methods to control the motor and read its state.
@@ -21,8 +19,8 @@ public class SparkMaxMotor implements MotorIO {
      * Constructor to initialize a brushless SparkMax motor with a CAN ID.
      * @param CANId The device's CAN ID.
      */
-    public SparkMaxMotor(CANDeviceId CANId) {
-        this.sparkMax = new CANSparkMax(CANId.getDeviceNumber(), MotorType.kBrushless);
+    public SparkMaxMotor(int CANId) {
+        this.sparkMax = new CANSparkMax(CANId, MotorType.kBrushless);
         this.sparkMax.restoreFactoryDefaults();
         this.encoder = sparkMax.getEncoder(); 
         this.isReversed = false;
@@ -33,8 +31,8 @@ public class SparkMaxMotor implements MotorIO {
      * @param CANId The device's CAN ID.
      * @param motorType The type of motor used.
      */
-    public SparkMaxMotor(CANDeviceId CANId, MotorType motorType) {
-        this.sparkMax = new CANSparkMax(CANId.getDeviceNumber(), motorType);
+    public SparkMaxMotor(int CANId, MotorType motorType) {
+        this.sparkMax = new CANSparkMax(CANId, motorType);
         this.encoder = sparkMax.getEncoder(); 
         this.isReversed = false;
     }
@@ -152,10 +150,7 @@ public class SparkMaxMotor implements MotorIO {
 
     // Setter methods
 
-    /**
-     * Set the motor direction to reversed.
-     * @param reversed True to reverse the motor, false to set it to normal.
-     */
+    @Override
     public void setReversed(boolean reversed) {
         this.isReversed = reversed;
     }

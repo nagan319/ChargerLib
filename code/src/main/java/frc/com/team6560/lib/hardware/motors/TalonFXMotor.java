@@ -8,8 +8,6 @@ import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
-import frc.com.team6560.lib.drivers.CANDeviceId;
-
 /**
  * Class representing a TalonFX motor implementation of the MotorIO interface.
  * Provides methods to control the motor and read its state.
@@ -23,8 +21,8 @@ public class TalonFXMotor implements MotorIO {
      * Constructor to initialize the TalonFX motor with a TalonFX object.
      * @param talonFX The TalonFX motor controller.
      */
-    public TalonFXMotor(CANDeviceId CANId) {
-        this.talonFX = new TalonFX(CANId.getDeviceNumber(), CANId.getBus());
+    public TalonFXMotor(int CANId) {
+        this.talonFX = new TalonFX(CANId);
         this.configProfile = new TalonFXConfiguration(); 
         talonFX.getConfigurator().apply(configProfile);
         this.isReversed = false;
@@ -35,7 +33,7 @@ public class TalonFXMotor implements MotorIO {
      * @param rampPeriod Ramp time in seconds.
      * @return TalonFXMotor for chainability.
      */
-    public TalonFXMotor withOpenLoopConfig(double rampPeriod) {
+    public TalonFXMotor withOpenLoopRampConfig(double rampPeriod) {
         var config = new OpenLoopRampsConfigs();
         config.DutyCycleOpenLoopRampPeriod = rampPeriod;
         talonFX.getConfigurator().apply(config);
@@ -153,10 +151,7 @@ public class TalonFXMotor implements MotorIO {
 
     // Setter methods
 
-    /**
-     * Set the motor direction to reversed.
-     * @param reversed True to reverse the motor, false to set it to normal.
-     */
+    @Override
     public void setReversed(boolean reversed) {
         this.isReversed = reversed;
     }

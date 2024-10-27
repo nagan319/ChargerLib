@@ -36,15 +36,22 @@ public interface MotorIO {
     double getCurrentSupplyAmps();
 
     /**
+     * Sets the motor to run forward or reversed depending on the input value.
+     * @param reversed Run in reversed it true.
+     */
+    void setReversed(boolean reversed);
+
+    /**
      * Sets the motor to an open-loop duty cycle.
      * @param dutyCycle The duty cycle to set, ranging from -1.0 (full reverse) to 1.0 (full forward).
      */
     void setOpenLoopDutyCycle(double dutyCycle);
 
     /**
-     * Resets the current position of the motor to zero.
+     * Sets motor velocity to target using PID.
+     * @param targetVelocity
      */
-    void setCurrentPositionAsZero();
+    void setVelocity(double targetVelocity);
 
     /**
      * Sets the current position of the motor to a specified value.
@@ -53,10 +60,9 @@ public interface MotorIO {
     void setCurrentPosition(double position);
 
     /**
-     * Sets motor velocity to target using PID.
-     * @param targetVelocity
+     * Resets the current position of the motor to zero.
      */
-    void setVelocity(double targetVelocity);
+    void setCurrentPositionAsZero();
 
     /**
      * Sets motor to brake mode.

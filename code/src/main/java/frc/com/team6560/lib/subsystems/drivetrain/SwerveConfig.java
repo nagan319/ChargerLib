@@ -29,8 +29,8 @@ public class SwerveConfig {
     public final double trackwidth;
     public final double wheelbase;
 
-    public final double maxVelocity;
-    public final double maxAngularVelocity;
+    public final double maxVelocity; // m/s
+    public final double maxAngularVelocity; // rad/s
 
     /**
      * Private constructor to enforce usage of builder.
