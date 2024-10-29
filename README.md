@@ -32,4 +32,3 @@ todo:
 - add reverseJoystick parameter for controls config
 - add interpolatable AimTrajectory table
 - add limelight class
-- add LED class
