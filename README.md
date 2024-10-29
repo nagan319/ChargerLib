@@ -26,6 +26,10 @@ questions:
 - is maxVoltage global or just drivetrain?
 - is setReverseLimitSwitch reversed or does the value have to be negative?
 - is setVelocity RPM or RPS?
+- TalonFX.setPosition(pos) vs TalonFX.getPIDController().setReference(pos, ControlType.kPosition);
 
 todo:
 - add reverseJoystick parameter for controls config
+- add interpolatable AimTrajectory table
+- add limelight class
+- add LED class
