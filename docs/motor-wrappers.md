@@ -112,7 +112,7 @@ The following initializes a TalonFXMotor set to CAN ID 10, with a PID profile of
 
 ```
 TalonFXMotor motor = new TalonFXMotor(15)
-    .withPIDProfile(.05, .01, 0.0, 0.0)
+    .withPIDProfile(.05, .01, 0.0)
     .withCurrentLimit(30)
     .withForwardSoftLimit(15.2)
     .withReverseSoftLimit(-10.8)

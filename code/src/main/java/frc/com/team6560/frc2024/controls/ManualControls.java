@@ -7,7 +7,7 @@ import frc.com.team6560.lib.controls.GenericDoubleXboxControls;
 public class ManualControls extends GenericDoubleXboxControls {
     
     public ManualControls(XboxController driverController, XboxController shooterController) {
-        super(driverController, shooterController, new DriveControlsConfig());
+        super(driverController, shooterController, new DriveControlsConfig.Builder().build());
     }
 
     public ManualControls(XboxController driverController, XboxController shooterController, DriveControlsConfig config) {

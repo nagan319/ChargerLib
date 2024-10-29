@@ -1,6 +1,5 @@
 package frc.com.team6560.frc2024.subsystems;
 
-import frc.com.team6560.lib.drivers.CANDeviceId;
 import frc.com.team6560.lib.hardware.motors.RollerSubsystemMotor;
 import frc.com.team6560.lib.hardware.motors.SparkMaxMotor;
 import frc.com.team6560.lib.hardware.motors.RollerSubsystemMotor.MotorMode;
@@ -17,7 +16,7 @@ public class Transfer extends BasicRollerSubsystem {
         super("Transfer");
         withMotor(
             new RollerSubsystemMotor(
-                new SparkMaxMotor(new CANDeviceId(20))
+                new SparkMaxMotor(20)
                 .withCurrentLimit(CURRENT_LIMIT)
                 .withOpenLoopRampConfig(OPEN_LOOP_RAMP_TIME)
                 .withBrakeMode(),

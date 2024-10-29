@@ -1,6 +1,5 @@
 package frc.com.team6560.frc2024.subsystems;
 
-import frc.com.team6560.lib.drivers.CANDeviceId;
 import frc.com.team6560.lib.hardware.motors.RollerSubsystemMotor;
 import frc.com.team6560.lib.hardware.motors.RollerSubsystemMotor.MotorMode;
 import frc.com.team6560.lib.subsystems.roller.BasicRollerSubsystem;
@@ -21,7 +20,7 @@ public class Shooter extends BasicRollerSubsystem {
         super("Shooter");
         withMotor(
             new RollerSubsystemMotor(
-                new TalonFXMotor(new CANDeviceId(15))
+                new TalonFXMotor(15)
                 .withCurrentLimit(MOTOR_CURRENT_LIMIT)
                 .withPIDProfile(kP, kI, kD),
                 MOTOR_TARGET_VELOCITY,
@@ -31,7 +30,7 @@ public class Shooter extends BasicRollerSubsystem {
         )
         .withMotor(
             new RollerSubsystemMotor(
-                new TalonFXMotor(new CANDeviceId(16))
+                new TalonFXMotor(16)
                 .withCurrentLimit(MOTOR_CURRENT_LIMIT)
                 .withPIDProfile(kP, kI, kD)
                 .withReversedMotor(),
@@ -42,7 +41,7 @@ public class Shooter extends BasicRollerSubsystem {
         )
         .withMotor(
             new RollerSubsystemMotor(
-                new TalonFXMotor(new CANDeviceId(17))
+                new TalonFXMotor(17)
                 .withCurrentLimit(MOTOR_CURRENT_LIMIT)
                 .withPIDProfile(kP, kI, kD),
                 MOTOR_TARGET_VELOCITY,

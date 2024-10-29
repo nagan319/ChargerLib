@@ -29,7 +29,7 @@ public class Intake extends BasicRollerSubsystem {
             new RollerSubsystemMotor(
                 new TalonFXMotor(Constants.CanIDs.INTAKE_FEED_MOTOR_ID)
                     .withCurrentLimit(INTAKE_CURRENT_LIMIT)
-                    .withOpenLoopConfig(OPEN_LOOP_RAMP_TIME)
+                    .withOpenLoopRampConfig(OPEN_LOOP_RAMP_TIME)
                     .withBrakeMode()
                     .withReversedMotor(),
                 INTAKE_FEED_RATE,

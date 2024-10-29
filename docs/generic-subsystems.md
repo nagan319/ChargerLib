@@ -100,4 +100,107 @@ Sets motor to run at reverse target speed.
 
 ## BasicRollerSubsystem
 
+The BasicRollerSubsystem provides a base for creating generic roller subsystems such as flywheels, intakes, and transfers. It allows for quickly building subsystems using wrapped motors and sensors, along with configuring sensor modes.
 
+### Example Usage
+
+#### Basic Roller Subsystem
+
+A basic 1-motor subystem without sensors can be created as follows:
+
+```
+public class Roller extends BasicRollerSubsystem {
+
+    public Roller() {
+        super("Roller");
+        withMotor(
+            new RollerSubsystemMotor(
+                new SparkMaxMotor(10)
+                    .withCurrentLimit(50)
+                    .withOpenLoopRampConfig(1.0),
+                0.8,
+                -0.4,
+                MotorMode.DUTY_CYCLE    
+            )
+        )
+        .build();
+    }
+
+}
+```
+The 'super' constructor must be called with the name of the subsystem (ex. "Roller") - this defines the shuffleboard display name of the subsystem.
+
+After motors are added using the withMotor constructor, the 'build' method must be chained so that shuffleboard values are properly displayed.
+
+#### Subsystem With Multiple Motors and Sensor
+
+A subsystem containing multiple motors and a sensor can be created as follows:
+
+```
+public class Intake extends BasicRollerSubsystem {
+
+    private static final int DISTANCE_SENSOR_PORT = 7;
+
+    private static final double INTAKE_FEED_RATE = 0.6;
+    private static final double INTAKE_REVERSE_RATE = -0.3;
+
+    private static final double TRANSFER_FEED_RATE = 1.0;
+    private static final double TRANSFER_REVERSE_RATE = -0.5;
+
+    private static final double INTAKE_CURRENT_LIMIT = 25.0;
+    private static final int TRANSFER_CURRENT_LIMIT = 25;
+
+    private static final double OPEN_LOOP_RAMP_TIME = 0.5;
+
+    public Intake() {
+        super("Intake");
+        withMotor(
+            new RollerSubsystemMotor(
+                new TalonFXMotor(Constants.CanIDs.INTAKE_FEED_MOTOR_ID)
+                    .withCurrentLimit(INTAKE_CURRENT_LIMIT)
+                    .withOpenLoopRampConfig(OPEN_LOOP_RAMP_TIME)
+                    .withBrakeMode()
+                    .withReversedMotor(),
+                INTAKE_FEED_RATE,
+                INTAKE_REVERSE_RATE,
+                MotorMode.DUTY_CYCLE
+            )
+        )
+        .withMotor(
+            new RollerSubsystemMotor(
+                new SparkMaxMotor(Constants.CanIDs.INTAKE_TRANSFER_MOTOR_ID)
+                    .withCurrentLimit(TRANSFER_CURRENT_LIMIT)
+                    .withOpenLoopRampConfig(OPEN_LOOP_RAMP_TIME)
+                    .withBrakeMode()
+                    .withReversedMotor(),
+                TRANSFER_FEED_RATE,
+                TRANSFER_REVERSE_RATE,
+                MotorMode.DUTY_CYCLE
+            )
+        )
+        .withDigitalInputSensor(
+            new DigitalInputSensor(DISTANCE_SENSOR_PORT)
+            .withReversedOutput()
+        )
+        .withSensorMode(
+            SensorMode.SENSOR_ON_PREVENTS_FORWARD
+        )
+        .build();
+    }
+
+}
+```
+
+### Sensor Modes
+
+Subsystems can be configured with various sensor modes, which determine how sensor input affects the functionality of the subsystem. The sensor modes are as follows:
+
+```DEACTIVATED``` - sensor output does not affect subsystem functionality.
+
+```FORWARD_REQUIRES_SENSOR_ON``` - forward motion of the subsystem requires the sensor to read 'true'. Reverse motion does not require sensor output.
+
+```SENSOR_ON_PREVENTS_FORWARD``` - forward motion of the subsystem requires the sensor to read 'false'. Reverse motion does not require sensor output.
+
+```REVERSE_REQUIRES_SENSOR_ON``` - reverse motion of the subsystem requires the sensor to read 'true'. Forward motion does not require sensor output.
+
+```SENSOR_ON_PREVENTS_REVERSE``` - reverse motion of the subsystem requires the sensor to read 'false'. Forward motion does not require sensor output.
