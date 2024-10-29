@@ -86,28 +86,28 @@ public class GenericSwerve extends SubsystemBase {
                 config.FLDriveCanID,
                 config.FLSteerCanID,
                 config.FLEncoderCanID,
-                0
+                config.offsets.FLOffset
             ),
             createSwerveModule(
                 "FR Module", 
                 config.FRDriveCanID,
                 config.FRSteerCanID,
                 config.FREncoderCanID,
-                0
+                config.offsets.FROffset
             ),
             createSwerveModule(
                 "BL Module", 
                 config.BLDriveCanID,
                 config.BLSteerCanID,
                 config.BLEncoderCanID,
-                0
+                config.offsets.BLOffset
             ),      
             createSwerveModule(
                 "BR Module", 
                 config.BRDriveCanID,
                 config.BRSteerCanID,
                 config.BREncoderCanID,
-                0
+                config.offsets.BROffset
             )
         };
 

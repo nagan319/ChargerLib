@@ -2,6 +2,16 @@
 
 ChargerLib provides a generic swerve template for drivetrains using either NEO or Falcon motors using the SDS swerve library. The GenericSwerve class can be initialized with drivetrain CAN IDs, dimensions, and maximum velocities specified in the SwerveConfig class and allows for completely reusing swerve code throughout seasons. 
 
+## SwerveOffsets
+
+The SwerveOffsets class encapsulates the offsets for all drivetrain modules. It can be initialized using 4 degree values for the offset of each module, as read from shuffleboard:
+
+```
+SwerveOffsets offsets = new SwerveOffsets(155.2, 68.3, 55.2, 273.9);
+```
+
+The input values should be degrees; they are automatically converted to radians and multiplied by negative one so that values from shuffleboard can be directly inputted.
+
 ## SwerveConfig
 
 The SwerveConfig class encapsulates all parameters necessary for initializing a GenericSwerve drivetrain, apart from global voltage. 
@@ -13,6 +23,7 @@ The SwerveConfig class stores the following fields:
 - Drivetrain wheelbase - length of drivetrain measured from centers of front and back wheels
 - Maximum velocity of drivetrain in m/s
 - Maximum angular (rotational) velocity of drivetrain in rad/s
+- Swerve offsets stored in a SwerveOffsets object
 
 The class can be initialized as follows using default parameters (as of the 2024 offseason):
 ```
@@ -39,6 +50,7 @@ SwerveConfig config = new SwerveConfig.Builder()
     .setDriveMotorType(MotorType.FALCON) 
     .setTrackwidth(0.6)
     .setWheelbase(0.6)
+    .setOffsets(new SwerveOffsets(132.5, 66.2, 277.9, 58.2))
     .build(); 
 ```
 

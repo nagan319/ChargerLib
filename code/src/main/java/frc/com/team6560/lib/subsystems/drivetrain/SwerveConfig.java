@@ -32,6 +32,8 @@ public class SwerveConfig {
     public final double maxVelocity; // m/s
     public final double maxAngularVelocity; // rad/s
 
+    public final SwerveOffsets offsets;
+
     /**
      * Private constructor to enforce usage of builder.
      * @param builder Builder to initialize class.
@@ -55,6 +57,7 @@ public class SwerveConfig {
         this.wheelbase = builder.wheelbase;
         this.maxVelocity = calculateMaxVelocity();
         this.maxAngularVelocity = calculateMaxAngularVelocity();
+        this.offsets = builder.offsets;
     }
 
     private double calculateMaxVelocity() {
@@ -88,6 +91,7 @@ public class SwerveConfig {
         private MotorType driveMotorType = MotorType.FALCON;
         private double trackwidth = 0.57785;
         private double wheelbase = 0.57785;
+        private SwerveOffsets offsets = new SwerveOffsets(0, 0, 0, 0);
 
         public Builder setFLSteerCanID(int id) { this.FLSteerCanID = id; return this; }
         public Builder setFLDriveCanID(int id) { this.FLDriveCanID = id; return this; }
@@ -105,6 +109,7 @@ public class SwerveConfig {
         public Builder setDriveMotorType(MotorType type) { this.driveMotorType = type; return this; }
         public Builder setTrackwidth(double trackwidth) { this.trackwidth = trackwidth; return this; }
         public Builder setWheelbase(double wheelbase) { this.wheelbase = wheelbase; return this; }
+        public Builder setOffsets(SwerveOffsets offsets) {this.offsets = offsets; return this; }
 
         public SwerveConfig build() {
             return new SwerveConfig(this);
