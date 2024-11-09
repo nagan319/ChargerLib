@@ -56,6 +56,9 @@ The DriveControlsConfig class stores the following fields:
 
 - Deadband: The deadband value used to filter out noise in joystick inputs. Must be in range [0, 1), would typically be somewhere between 0 and 0.2 for responsive controls.
 
+- ReverseX: Whether to reverse the X input of the driver joystick
+- ReverseY: Whether to reverse the Y input of the driver joystick
+
 ### Initialization
 
 The class can be initialized as follows using default parameters (as of the 2024 offseason):
@@ -77,6 +80,8 @@ DriveControlsConfig config = new DriveControlsConfig.Builder()
     .setTurnSpeedMaxPercent(0.4)
     .setTurnSpeedStepPercent(0.01)
     .setDeadband(0.08)
+    .setReverseX(true)
+    .setReverseY(true)
     .build();
 ```
 

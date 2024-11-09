@@ -48,7 +48,7 @@ public interface MotorIO {
     void setOpenLoopDutyCycle(double dutyCycle);
 
     /**
-     * Sets motor velocity to target using PID.
+     * Sets motor velocity to target (RPM) using PID.
      * @param targetVelocity
      */
     void setVelocity(double targetVelocity);

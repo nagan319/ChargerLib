@@ -16,6 +16,9 @@ public class DriveControlsConfig {
 
     public final double deadband;
 
+    public final boolean reverseX;
+    public final boolean reverseY;
+
     /**
      * Private constructor to enforce usage of builder.
      * @param builder Builder to initialize class.
@@ -32,6 +35,9 @@ public class DriveControlsConfig {
         this.turnSpeedStepPercent = builder.turnSpeedStepPercent;
 
         this.deadband = builder.deadband;
+
+        this.reverseX = builder.reverseX;
+        this.reverseY = builder.reverseY;
     }
 
     /**
@@ -51,6 +57,9 @@ public class DriveControlsConfig {
 
         private double deadband = 0.1;
 
+        private boolean reverseX = false;
+        private boolean reverseY = false;
+
         public Builder setSpeedInitialPercent(double percent) { this.speedInitialPercent = percent; return this; }
         public Builder setSpeedMinPercent(double percent) { this.speedMinPercent = percent; return this; }
         public Builder setSpeedMaxPercent(double percent) { this.speedMaxPercent = percent; return this; }
@@ -62,6 +71,9 @@ public class DriveControlsConfig {
         public Builder setTurnSpeedStepPercent(double percent) { this.turnSpeedStepPercent = percent; return this; }
 
         public Builder setDeadband(double deadband) { this.deadband = deadband; return this; }
+
+        public Builder setReverseX(boolean reverseX) {this.reverseX = reverseX; return this; }
+        public Builder setReverseY(boolean reverseY) {this.reverseY = reverseY; return this; }
 
         public DriveControlsConfig build() {
             return new DriveControlsConfig(this);

@@ -1,5 +1,6 @@
 package frc.com.team6560.lib.hardware.motors;
 
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.OpenLoopRampsConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
@@ -14,8 +15,6 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
  */
 public class TalonFXMotor implements MotorIO {
     private TalonFX talonFX; 
-    private TalonFXConfiguration configProfile;
-    private boolean isReversed;
 
     /**
      * Constructor to initialize the TalonFX motor with a TalonFX object.
@@ -23,9 +22,7 @@ public class TalonFXMotor implements MotorIO {
      */
     public TalonFXMotor(int CANId) {
         this.talonFX = new TalonFX(CANId);
-        this.configProfile = new TalonFXConfiguration(); 
-        talonFX.getConfigurator().apply(configProfile);
-        this.isReversed = false;
+        talonFX.getConfigurator().apply(new TalonFXConfiguration());
     }
 
     /**
@@ -62,8 +59,10 @@ public class TalonFXMotor implements MotorIO {
      * @return TalonFXMotor for chainability.
      */
     public TalonFXMotor withCurrentLimit(double currentLimit) {
-        this.configProfile.CurrentLimits.SupplyCurrentLimit = currentLimit;
-        this.configProfile.CurrentLimits.SupplyCurrentLimitEnable = true;
+        var config = new CurrentLimitsConfigs();
+        config.SupplyCurrentLimit = currentLimit;
+        config.StatorCurrentLimitEnable = true;
+        talonFX.getConfigurator().apply(config);
         return this;
     }
 
@@ -153,12 +152,12 @@ public class TalonFXMotor implements MotorIO {
 
     @Override
     public void setReversed(boolean reversed) {
-        this.isReversed = reversed;
+        talonFX.setInverted(reversed);
     }
 
     @Override
     public void setOpenLoopDutyCycle(double dutyCycle) {
-        talonFX.set(isReversed? -dutyCycle : dutyCycle); // Duty cycle ranges from -1.0 to 1.0
+        talonFX.set(dutyCycle); // Duty cycle ranges from -1.0 to 1.0
     }
 
     @Override
@@ -173,7 +172,7 @@ public class TalonFXMotor implements MotorIO {
 
     @Override
     public void setVelocity(double targetVelocity) {
-        talonFX.setControl(new VelocityVoltage(isReversed? -targetVelocity : targetVelocity));
+        talonFX.setControl(new VelocityVoltage(targetVelocity / 60));
     }
 
     @Override

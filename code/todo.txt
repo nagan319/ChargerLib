@@ -1,5 +1,0 @@
-- try synchronizing can signals for talonfx and sparkmax <-- low priority, think about this later
-- figure out drivetrain odometry
-- get rid of CanID class - pretty useless
-- figure out AdvantageKit logging, 'deprecated' TimedRobot class
-- see if possible to make aiming subsystems more accurate - professional approach: 1678, 254

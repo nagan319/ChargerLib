@@ -80,12 +80,14 @@ public class GenericDoubleXboxControls implements GenericControlsIO {
 
     @Override
     public double driveX() {
-        return -modifyAxis(driverController.getLeftY() * speed.get(), config.deadband);
+        var sign = this.config.reverseY ? -1 : 1;
+        return sign * modifyAxis(driverController.getLeftY() * speed.get(), config.deadband);
     }
 
     @Override
     public double driveY() {
-        return -modifyAxis(driverController.getLeftX() * speed.get(), config.deadband);
+        var sign = this.config.reverseX ? -1 : 1;
+        return sign * modifyAxis(driverController.getLeftX() * speed.get(), config.deadband);
     }
 
     @Override
